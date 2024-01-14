@@ -1,11 +1,11 @@
-import json
 import uuid
 from datetime import datetime
+
 import boto3
 
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table('PersonDetailsBMI')
-now =  datetime.utcnow().isoformat()
+now = datetime.utcnow().isoformat()
 
 
 def calculate_bmi(weight, height):
@@ -18,16 +18,16 @@ def lambda_handler(event, context):
     # Extract values from the Lambda service's event object
     first_name = event['firstName']
     last_name = event['lastName']
-    weight = event['weight']
-    height = event['height']
-
-    # Generate a UUID for the id field
-    person_id = str(uuid.uuid4())
+    weight = float(event['weight'])
+    height = float(event['height'])
 
     # Calculate BMI
     bmi = calculate_bmi(weight, height)
 
     if first_name != "":
+        # Generate a UUID for the id field
+        person_id = str(uuid.uuid4())
+
         # Save data to DynamoDB
         response = table.put_item(
             Item={
@@ -43,5 +43,5 @@ def lambda_handler(event, context):
 
     return {
         'statusCode': 200,
-        'body': json.dumps(f'{bmi}')
+        'body': bmi
     }
