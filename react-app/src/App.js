@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import CalculeazaBMI from './CalculeazaBMI';
-import CautaRezultate from './CautaRezultate';
+import CalculateBMI from './CalculateBMI';
+import SearchBMIResults from './SearchBmiResults';
 
 function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/calculeaza-bmi" element={<CalculeazaBMI />} />
-                <Route path="/cauta-rezultate" element={<CautaRezultate />} />
-                <Route path="/" element={<CalculeazaBMI />} />
+                <Route path="/calculate-bmi" element={<CalculateBMI />} />
+                <Route path="/search-bmi-results" element={<SearchBMIResults />} />
+                <Route path="/" element={<CalculateBMI />} />
             </Routes>
         </Router>
     );

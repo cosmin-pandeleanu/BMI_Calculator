@@ -3,9 +3,18 @@ import {Link} from "react-router-dom";
 
 function formatDateString(dateString) {
     const date = new Date(dateString);
-    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short' };
+    const options = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        timeZoneName: 'short'
+    };
     return date.toLocaleDateString('en-US', options);
 }
+
 async function searchBMIresults() {
     const firstName = document.getElementById('firstName').value;
     const lastName = document.getElementById('lastName').value;
@@ -31,7 +40,7 @@ async function searchBMIresults() {
         resultsTable.setAttribute('border', '1');
 
         const headerRow = resultsTable.insertRow(0);
-        const headerCells = ['Greutate(kg)', 'Întălțime(cm)', 'BMI', 'Data înregistrării rezultatelor'];
+        const headerCells = ['Weight(kg)', 'Height(cm)', 'BMI', 'Date of record'];
         headerCells.forEach((headerText, index) => {
             const headerCell = document.createElement('th');
             headerCell.textContent = headerText;
@@ -43,7 +52,7 @@ async function searchBMIresults() {
             const cells = ['weight', 'height', 'bmi', 'date'];
             cells.forEach(cellName => {
                 const cell = row.insertCell();
-                if(cellName !== 'date')
+                if (cellName !== 'date')
                     cell.textContent = result[cellName];
                 else
                     cell.textContent = formatDateString(result[cellName])
@@ -53,36 +62,36 @@ async function searchBMIresults() {
 
         resultsContainer.appendChild(resultsTable);
     } else {
-
         const noResultsMessage = document.createElement('p');
-        noResultsMessage.textContent = 'Nu există înregistrări pentru acest utilizator.';
-        resultsContainer.appendChild(noResultsMessage);
+        noResultsMessage.textContent = 'There are no records for this user!';
+        resultsContainer.appendChild(noResultsMessage)
+        resultsContainer.style.color = 'red';
     }
 
 
 }
 
-function CautaRezultate() {
+function SearchBMIResults() {
     return (<div>
         <header>
             <h1>BMI Calculator</h1>
         </header>
         <nav>
-            <Link to="/calculeaza-bmi">Calculează BMI</Link>
-            <Link to="/cauta-rezultate">Caută rezultate BMI</Link>
+            <Link to="/calculate-bmi">Calculate BMI</Link>
+            <Link to="/search-bmi-results">Search BMI results</Link>
         </nav>
         <form id="bmiForm">
-            <label htmlFor="lastName">Nume*:</label>
+            <label htmlFor="lastName">Last Name*:</label>
             <input type="text" id="lastName" name="lastName" required/><br/>
 
-            <label htmlFor="firstName">Prenume*:</label>
+            <label htmlFor="firstName">FirstName*:</label>
             <input type="text" id="firstName" name="firstName" required/><br/>
 
-            <button type="button" onClick={searchBMIresults}>Caută rezultate BMI</button>
+            <button type="button" onClick={searchBMIresults}>Search BMI results</button>
 
         </form>
         <div id="results"></div>
     </div>);
 }
 
-export default CautaRezultate;
+export default SearchBMIResults;
