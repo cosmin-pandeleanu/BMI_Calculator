@@ -38,7 +38,7 @@ async function calculateBMI() {
     const weight = document.getElementById('weight').value;
     const height = document.getElementById('height').value;
 
-    const response = await fetch('https://lcz9wk45a1.execute-api.us-east-1.amazonaws.com/dev/calculate', {
+    const response = await fetch('https://5g3wnc30pc.execute-api.us-east-1.amazonaws.com/dev/calculate', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

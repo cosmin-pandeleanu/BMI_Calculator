@@ -19,7 +19,7 @@ async function searchBMIresults() {
     const firstName = document.getElementById('firstName').value;
     const lastName = document.getElementById('lastName').value;
 
-    const response = await fetch('https://lcz9wk45a1.execute-api.us-east-1.amazonaws.com/dev/search', {
+    const response = await fetch('https://5g3wnc30pc.execute-api.us-east-1.amazonaws.com/dev/search', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
